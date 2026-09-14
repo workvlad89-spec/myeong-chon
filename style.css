@@ -1,0 +1,150 @@
+:root {
+  --black: #000000;
+  --panel: #121110;
+  --gold: #f2c14e;
+  --gold-deep: #c9932c;
+  --cream: #f5ead0;
+  --line: rgba(242, 193, 78, 0.25);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--black);
+  color: var(--cream);
+  font-family: "Noto Sans", "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
+  min-height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 20px 48px;
+}
+
+.logo {
+  width: 100%;
+  max-width: 640px;
+  display: block;
+  margin: 0 auto;
+}
+
+.wrap {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.tagline {
+  margin: 22px 0 8px;
+  font-size: 15px;
+  line-height: 1.6;
+  letter-spacing: 0.02em;
+  color: var(--cream);
+  opacity: 0.85;
+}
+
+.divider {
+  width: 64px;
+  height: 1px;
+  background: var(--line);
+  margin: 22px 0 26px;
+}
+
+.buttons {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 16px 20px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--cream);
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-align: left;
+  transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn:hover {
+  border-color: var(--gold);
+  background: #17150f;
+}
+
+.btn .icon {
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
+  fill: var(--gold);
+}
+
+.btn .label {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.btn .title {
+  color: var(--gold);
+  font-size: 16px;
+}
+
+.btn .sub {
+  font-size: 12.5px;
+  font-weight: 400;
+  color: var(--cream);
+  opacity: 0.65;
+}
+
+.btn.primary {
+  border-color: var(--gold-deep);
+  background: linear-gradient(180deg, #1c1710, var(--panel));
+}
+
+.back {
+  margin-top: 30px;
+  color: var(--gold);
+  opacity: 0.8;
+  text-decoration: none;
+  font-size: 14px;
+  letter-spacing: 0.03em;
+}
+
+.back:hover { opacity: 1; }
+
+.footer {
+  margin-top: 40px;
+  font-size: 13px;
+  color: var(--cream);
+  opacity: 0.55;
+  line-height: 1.7;
+}
+
+.footer .kr {
+  color: var(--gold);
+  opacity: 0.9;
+}
+
+@media (max-width: 380px) {
+  .btn { padding: 14px 16px; }
+}
