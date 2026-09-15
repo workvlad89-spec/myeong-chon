@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sushi & Roll Menu — Myeong Chon 명촌</title>
+<meta name="description" content="Sushi & Roll — pełne menu z cenami. Myeong Chon, restauracja koreańska i sushi we Wrocławiu.">
+<style>
+  :root{
+    --ink:#141414;
+    --slate:#1c1e20;
+    --slate-2:#25282b;
+    --paper:#f7f3ec;
+    --red:#c0392b;
+    --red-2:#e0533f;
+    --gold:#c9a15a;
+    --line:rgba(247,243,236,0.12);
+    --muted:#a9a49b;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--ink);
+    color:var(--paper);
+    font-family:'Noto Sans','Helvetica Neue',Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{
+    font-family:Georgia,'Times New Roman',serif;
+    font-weight:600;
+    margin:0;
+  }
+
+  /* HERO */
+  .hero{
+    position:relative;
+    min-height:46vh;
+    display:flex;
+    align-items:flex-end;
+    background:
+      linear-gradient(180deg, rgba(10,10,10,0.35) 0%, rgba(10,10,10,0.55) 40%, var(--ink) 100%),
+      url('img/sushi/hero.jpg') center 30%/cover no-repeat;
+    padding:32px 6vw 40px;
+  }
+  .hero-inner{max-width:1100px; margin:0 auto; width:100%;}
+  .eyebrow{
+    color:var(--red-2);
+    letter-spacing:0.14em;
+    font-size:13px;
+    font-weight:600;
+    margin-bottom:10px;
+  }
+  .hero h1{
+    font-size:clamp(34px,6vw,64px);
+    line-height:1.02;
+    color:var(--paper);
+  }
+  .hero p{
+    color:var(--muted);
+    max-width:46ch;
+    margin-top:14px;
+    font-size:16px;
+    line-height:1.5;
+  }
+
+  /* NAV / FILTERS */
+  .filters-wrap{
+    position:sticky;
+    top:0;
+    z-index:20;
+    background:rgba(20,20,20,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .filters{
+    max-width:1100px;
+    margin:0 auto;
+    display:flex;
+    gap:8px;
+    overflow-x:auto;
+    padding:14px 6vw;
+    scrollbar-width:none;
+  }
+  .filters::-webkit-scrollbar{display:none;}
+  .filter-btn{
+    flex:0 0 auto;
+    background:transparent;
+    border:1px solid var(--line);
+    color:var(--muted);
+    padding:9px 18px;
+    border-radius:999px;
+    font-size:14px;
+    cursor:pointer;
+    white-space:nowrap;
+    transition:all .18s ease;
+  }
+  .filter-btn:hover{border-color:var(--red-2); color:var(--paper);}
+  .filter-btn.active{
+    background:var(--red);
+    border-color:var(--red);
+    color:#fff;
+  }
+
+  /* SECTIONS */
+  main{max-width:1100px; margin:0 auto; padding:10px 6vw 80px;}
+  .category{padding-top:56px;}
+  .category:first-child{padding-top:40px;}
+  .cat-head{
+    display:flex;
+    align-items:baseline;
+    gap:16px;
+    margin-bottom:28px;
+    border-bottom:1px solid var(--line);
+    padding-bottom:16px;
+  }
+  .cat-head h2{
+    font-size:clamp(24px,3.4vw,34px);
+    color:var(--paper);
+  }
+  .cat-head .cat-note{
+    color:var(--gold);
+    font-size:13px;
+    font-style:italic;
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(260px,1fr));
+    gap:22px;
+  }
+
+  .card{
+    background:var(--slate);
+    border:1px solid var(--line);
+    border-radius:10px;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    transition:transform .2s ease, border-color .2s ease;
+  }
+  .card:hover{transform:translateY(-3px); border-color:rgba(224,83,63,0.4);}
+  .card .photo{
+    aspect-ratio:4/3;
+    overflow:hidden;
+    background:var(--slate-2);
+  }
+  .card .photo img{
+    width:100%; height:100%;
+    object-fit:cover;
+    display:block;
+  }
+  .card-body{padding:16px 18px 18px; display:flex; flex-direction:column; gap:8px; flex:1;}
+  .card-top{display:flex; justify-content:space-between; align-items:baseline; gap:10px;}
+  .card-top h3{
+    font-size:17px;
+    color:var(--paper);
+    line-height:1.25;
+  }
+  .num{color:var(--red-2); font-weight:700; margin-right:6px; font-size:14px;}
+  .price{
+    font-family:Georgia,serif;
+    font-size:18px;
+    color:var(--gold);
+    white-space:nowrap;
+    flex:0 0 auto;
+  }
+  .desc{
+    color:var(--muted);
+    font-size:13.5px;
+    line-height:1.55;
+  }
+  .desc .pl{color:#cfcac0;}
+  .desc .en{display:block; margin-top:4px; font-style:italic; color:#8b867d; font-size:12.5px;}
+
+  footer{
+    text-align:center;
+    padding:40px 6vw 60px;
+    color:var(--muted);
+    font-size:13px;
+    border-top:1px solid var(--line);
+  }
+  footer a{color:var(--red-2); text-decoration:none;}
+  .back-link{
+    display:inline-block;
+    margin-top:14px;
+    color:var(--paper);
+  }
+
+  @media (max-width:520px){
+    .grid{grid-template-columns:1fr;}
+    .hero{min-height:38vh; padding:24px 5vw 30px;}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">MYEONG CHON 명촌</div>
+    <h1>Sushi &amp; Roll</h1>
+    <p>Maki, nigiri, zestawy lunchowe i autorskie rolki — przygotowywane świeżo każdego dnia.</p>
+  </div>
+</header>
+
+<div class="filters-wrap">
+  <nav class="filters" id="filters">
+    <button class="filter-btn active" data-target="all">Wszystko</button>
+    <button class="filter-btn" data-target="lunch">Lunch (12:00–15:00)</button>
+    <button class="filter-btn" data-target="maki">Maki</button>
+    <button class="filter-btn" data-target="zestaw">Zestaw</button>
+  </nav>
+</div>
+
+<main>
+
+  <section class="category" id="lunch">
+    <div class="cat-head">
+      <h2>런치메뉴 · Lunch menu</h2>
+      <span class="cat-note">12:00–15:00</span>
+    </div>
+    <div class="grid">
+
+      <article class="card">
+        <div class="photo"><img src="img/sushi/lunch1.jpg" alt="Lunch Set Maki" loading="lazy"></div>
+        <div class="card-body">
+          <div class="card-top"><h3><span class="num">1.</span>Lunch Set (Maki)</h3><span class="price">55 zł</span></div>
+          <p class="desc"><span class="pl">6 Sake Futo Maki (surowy lub pieczony łosoś, ogórek, awokado, tamago, serek kremowy) lub Ebiten Maki (krewetka w tempurze, ogórek, majonez), 6 Hoso Maki (3 z łososiem, 3 z ogórkiem), 4 California Sake, zupa miso.</span></p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="photo"><img src="img/sushi/lunch2.jpg" alt="Lunch Set Sushi Tempura" loading="lazy"></div>
+        <div class="card-body">
+          <div class="card-top"><h3><span class="num">2.</span>Lunch Set (Sushi Tempura)</h3><span class="price">60 zł</span></div>
+          <p class="desc"><span class="pl">4 Nigiri (2 łosoś, 1 tuńczyk, 1 krewetka), 4 California Sake, 4 Tempura (krewetka, cebula, cukinia, ryba w tempurze), zupa miso.</span></p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="photo"><img src="img/sushi/lunch3.jpg" alt="Lunch Set Sushi Sashimi" loading="lazy"></div>
+        <div class="card-body">
+          <div class="card-top"><h3><span class="num">3.</span>Lunch Set (Sushi Sashimi)</h3><span class="price">65 zł</span></div>
+          <p class="desc"><span class="pl">4 Nigiri, 4 California Sake, 6 Sashimi (2 łosoś, 2 tuńczyk, 2 biała ryba), 6 Hosomaki, zupa miso.</span></p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="photo"><img src="img/sushi/lunch4.jpg" alt="Lunch Set Grill" loading="lazy"></div>
+        <div class="card-body">
+          <div class="card-top"><h3><span class="num">4.</span>Lunch Set (Grill)</h3><span class="price">65 zł</span></div>
+          <p class="desc"><span class="pl">4 Nigiri, 4 California Sake, grillowany łosoś, zupa miso.</span></p>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="category" id="maki">
+    <div class="cat-head"><h2>Maki</h2></div>
+    <div class="grid">
+
+      <article class="card">
+        <div class="photo"><img src="img/sushi/d05.jpg" alt="Sake Futo Tatar" loading="lazy"></div>
+        <div class="card-body">
+          <div class="card-top"><h3><span class="num">5.</span>Sake Futo Tatar (6 szt.)</h3><span class="price">35 zł</span></div>
+          <p class="desc"><span class="pl">Tatar z łososia lub tuńczyka, tamago, ogórek, awokado, marynowana rzodkiewka.</span></p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="photo"><img src="img/sushi/d06.jpg" alt="Sake Futomaki" loading="lazy"></div>
+        <div class="card-body">
+          <div class="card-top"><h3><span class="num">6.</span>Sake Futomaki (6 szt.)</h3><span class="price">32 zł</span></div>
+          <p class="desc"><span class="pl">Surowy lub pieczony łosoś, ogórek, awokado, tamago, serek kremowy.</span></p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="photo"><img src="img/sushi/d07.jpg" alt="Ebi Gold" loading="lazy"></div>
+        <div class="card-body">
+          <div class="card-top"><h3><span class="num">7.</span>Ebi Gold (5 szt.)</h3><span class="price">35 zł</span></div>
+          <p class="desc"><span class="pl">Krewetka w tempurze, ogórek, surowy łosoś, tamago, awokado, majonez, kawior.</span></p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="photo"><img src="img/sushi/d08.jpg" alt="Ebi Ten" loading="lazy"></div>
+        <div class="card-body">
+          <div class="card-top"><h3><span class="num">8.</span>Ebi Ten (5 szt.)</h3><span class="price">30 zł</span></div>
+          <p class="desc"><span class="pl">Krewetka w tempurze, ogórek, majonez.</span></p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="photo"><img src="img/sushi/d09.jpg" alt="Sake Tataki" loading="lazy"></div>
+        <div class="card-body">
+          <div class="card-top"><h3><span class="num">9.</span>Sake Tataki (5 szt.)</h3><span class="price">35 zł</span></div>
+          <p class="desc"><span class="pl">Łosoś z parmezanem podpalany na wierzchu, pieczony lub surowy łosoś, ogórek, awokado, serek kremowy.</span></p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="photo"><img src="img/sushi/d10.jpg" alt="Tempura Tatar" loading="lazy"></div>
+        <div class="card-body">
+          <div class="card-top"><h3><span class="num">10.</span>Tempura Tatar (6 szt.)</h3><span class="price">40 zł</span></div>
+          <p class="desc"><span class="pl">Tatar z łososia, ogórek, tamago, rolka smażona, tatar z łososia na wierzchu.</span></p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="photo"><img src="img/sushi/d11.jpg" alt="Vege Roll" loading="lazy"></div>
+        <div class="card-body">
+          <div class="card-top"><h3><span class="num">11.</span>Vege Roll (5 szt.)</h3><span class="price">30 zł</span></div>
+          <p class="desc"><span class="pl">Ogórek, tykwa kanpyo, awokado, sałata, serek kremowy, marynowana rzodkiewka.</span></p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="photo"><img src="img/sushi/d12.jpg" alt="Vege Combo" loading="lazy"></div>
+        <div class="card-body">
+          <div class="card-top"><h3><span class="num">12.</span>Vege Combo</h3><span class="price">55 zł</span></div>
+          <p class="desc"><span class="pl">Nigiri 5 (spytać obsługę), Vege Roll 5, Hoso Maki 6 (ogórek).</span></p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="photo"><img src="img/sushi/d13.jpg" alt="Sashimi Roll" loading="lazy"></div>
+        <div class="card-body">
+          <div class="card-top"><h3><span class="num">13.</span>Sashimi Roll (5 szt.)</h3><span class="price">40 zł</span></div>
+          <p class="desc"><span class="pl">Bez ryżu — tuńczyk, krewetki, ogórek, awokado, sałata, serek kremowy, wszystko zawinięte w łososia.</span></p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="photo"><img src="img/sushi/d14.jpg" alt="Geisha Roll" loading="lazy"></div>
+        <div class="card-body">
+          <div class="card-top"><h3><span class="num">14.</span>Geisha Roll (5 szt.)</h3><span class="price">45 zł</span></div>
+          <p class="desc"><span class="pl">Wybrana ryba (surowy/pieczony łosoś, tuńczyk, węgorz, krewetka tempura), awokado, tamago, ogórek, majonez.</span></p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="photo"><img src="img/sushi/d15.jpg" alt="Unagi Dragon Roll" loading="lazy"></div>
+        <div class="card-body">
+          <div class="card-top"><h3><span class="num">15.</span>Unagi Dragon Roll (5 szt.)</h3><span class="price">45 zł</span></div>
+          <p class="desc"><span class="pl">Węgorz słodkowodny, tamago, awokado, majonez.</span></p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="photo"><img src="img/sushi/d16.jpg" alt="Chicken Roll" loading="lazy"></div>
+        <div class="card-body">
+          <div class="card-top"><h3><span class="num">16.</span>Chicken Roll (5 szt.)</h3><span class="price">30 zł</span></div>
+          <p class="desc"><span class="pl">Smażony kurczak, sałata, ogórek, tamago, marynowana rzodkiewka.</span></p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="photo"><img src="img/sushi/d17.jpg" alt="Salmon Tamago Roll" loading="lazy"></div>
+        <div class="card-body">
+          <div class="card-top"><h3><span class="num">17.</span>Salmon Tamago Roll (10 szt.)</h3><span class="price">50 zł</span></div>
+          <p class="desc"><span class="pl">Surowy łosoś, awokado, serek kremowy.</span></p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="photo"><img src="img/sushi/d18.jpg" alt="Sakura Roll" loading="lazy"></div>
+        <div class="card-body">
+          <div class="card-top"><h3><span class="num">18.</span>Sakura Roll (10 szt.)</h3><span class="price">52 zł</span></div>
+          <p class="desc"><span class="pl">Pieczony lub surowy łosoś, awokado, ogórek, tamago, serek kremowy.</span></p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="photo"><img src="img/sushi/d19.jpg" alt="Philadelphia Roll" loading="lazy"></div>
+        <div class="card-body">
+          <div class="card-top"><h3><span class="num">19.</span>Philadelphia Roll (5 szt.)</h3><span class="price">35 zł</span></div>
+          <p class="desc"><span class="pl">Pieczony lub surowy łosoś, awokado, ogórek, tamago, serek kremowy.</span></p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="photo"><img src="img/sushi/d20.jpg" alt="Golden California Roll" loading="lazy"></div>
+        <div class="card-body">
+          <div class="card-top"><h3><span class="num">20.</span>Golden California Roll (5 szt.)</h3><span class="price">35 zł</span></div>
+          <p class="desc"><span class="pl">Surowy łosoś, awokado, surimi, ogórek, serek kremowy.</span></p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="photo"><img src="img/sushi/d21.jpg" alt="California Unagi Roll" loading="lazy"></div>
+        <div class="card-body">
+          <div class="card-top"><h3><span class="num">21.</span>California Unagi Roll (5 szt.)</h3><span class="price">40 zł</span></div>
+          <p class="desc"><span class="pl">Grillowany węgorz słodkowodny, ogórek, tamago, sałata, awokado, serek kremowy.</span></p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="photo"><img src="img/sushi/d22.jpg" alt="Futo Ten Tempura Roll" loading="lazy"></div>
+        <div class="card-body">
+          <div class="card-top"><h3><span class="num">22.</span>Futo Ten Tempura Roll (6 szt.)</h3><span class="price">35 zł</span></div>
+          <p class="desc"><span class="pl">Surowy łosoś, serek kremowy, tamago, ogórek, awokado, marynowana rzodkiewka, rolka smażona w panko.</span></p>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="category" id="zestaw">
+    <div class="cat-head"><h2>Zestaw</h2></div>
+    <div class="grid">
+
+      <article class="card">
+        <div class="photo"><img src="img/sushi/d23.jpg" alt="Salmon Lover's Set" loading="lazy"></div>
+        <div class="card-body">
+          <div class="card-top"><h3><span class="num">23.</span>Salmon Lover's Set</h3><span class="price">60 zł</span></div>
+          <p class="desc"><span class="pl">6 Nigiri (łosoś), 8 California Sake.</span></p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="photo"><img src="img/sushi/d24.jpg" alt="Tuna Lover's Set" loading="lazy"></div>
+        <div class="card-body">
+          <div class="card-top"><h3><span class="num">24.</span>Tuna Lover's Set</h3><span class="price">70 zł</span></div>
+          <p class="desc"><span class="pl">6 Nigiri (tuńczyk), 8 California Tuna.</span></p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="photo"><img src="img/sushi/d25.jpg" alt="Unagi Lover's Set" loading="lazy"></div>
+        <div class="card-body">
+          <div class="card-top"><h3><span class="num">25.</span>Unagi Lover's Set</h3><span class="price">70 zł</span></div>
+          <p class="desc"><span class="pl">6 Nigiri (węgorz), 8 California Unagi.</span></p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="photo"><img src="img/sushi/d26.jpg" alt="Sushi Lover's Set" loading="lazy"></div>
+        <div class="card-body">
+          <div class="card-top"><h3><span class="num">26.</span>Sushi Lover's Set</h3><span class="price">55 zł</span></div>
+          <p class="desc"><span class="pl">7 Nigiri (3 łosoś, 2 tuńczyk, 1 biała ryba, 1 krewetka), 3 Hosomaki łosoś, 3 Hosomaki ogórek.</span></p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="photo"><img src="img/sushi/d27.jpg" alt="Maki Lover's Set" loading="lazy"></div>
+        <div class="card-body">
+          <div class="card-top"><h3><span class="num">27.</span>Maki Lover's Set</h3><span class="price">60 zł</span></div>
+          <p class="desc"><span class="pl">6 Sake Futomaki, 3 Hosomaki łosoś, 3 Hosomaki ogórek, 4 California Sake.</span></p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="photo"><img src="img/sushi/d28.jpg" alt="Nigiri & Grill Set" loading="lazy"></div>
+        <div class="card-body">
+          <div class="card-top"><h3><span class="num">28.</span>Nigiri &amp; Grill Set</h3><span class="price">130 zł</span></div>
+          <p class="desc"><span class="pl">12 Nigiri (do wyboru łosoś, tuńczyk, biała ryba lub krewetka), 5 Philadelphia Roll.</span></p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="photo"><img src="img/sushi/d29.jpg" alt="Salmon Roll Symphony Set" loading="lazy"></div>
+        <div class="card-body">
+          <div class="card-top"><h3><span class="num">29.</span>Salmon Roll Symphony Set (Raw lub Grill)</h3><span class="price">105 / 110 zł</span></div>
+          <p class="desc"><span class="pl">4 California Sake, 4 California Gold, 5 Philadelphia Roll, 6 Sake Futomaki.</span></p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="photo"><img src="img/sushi/d30.jpg" alt="Ebi Luxe Collection Set" loading="lazy"></div>
+        <div class="card-body">
+          <div class="card-top"><h3><span class="num">30.</span>Ebi Luxe Collection Set</h3><span class="price">120 zł</span></div>
+          <p class="desc"><span class="pl">4 Ebi Ten Roll, 5 Ebi Gold, 4 Alaska Roll, 2 Ebi Tempura.</span></p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="photo"><img src="img/sushi/d31.jpg" alt="Maki Good Time Set A" loading="lazy"></div>
+        <div class="card-body">
+          <div class="card-top"><h3><span class="num">31.</span>Maki Good Time Set A</h3><span class="price">150 zł</span></div>
+          <p class="desc"><span class="pl">6 Futomaki, 6 Sake Futomaki, 6 Hosomaki, 4 California Sake, 5 Philadelphia Roll, 6 Futo Ten.</span></p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-body" style="padding-top:18px;">
+          <div class="card-top"><h3><span class="num">32.</span>Maki Good Time Set B</h3><span class="price">210 zł</span></div>
+          <p class="desc"><span class="pl">6 Futomaki, 6 Sake Futomaki, 12 Hosomaki, 4 California Sake, 5 Philadelphia Roll, 12 Futo Ten.</span></p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-body" style="padding-top:18px;">
+          <div class="card-top"><h3><span class="num">33.</span>Maki Good Time Set C</h3><span class="price">350 zł</span></div>
+          <p class="desc"><span class="pl">12 Futo Ten Roll, 5 Philadelphia Roll, 12 Hosomaki, 5 Ebi Gold, 8 Sake Tataki, 8 Sake Gold, 8 Dragon Roll, 10 Sashimi Roll.</span></p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="photo"><img src="img/sushi/d32.jpg" alt="Deluxe Nigiri & Roll Set A" loading="lazy"></div>
+        <div class="card-body">
+          <div class="card-top"><h3><span class="num">34.</span>Signature Roll Set</h3><span class="price">250 zł</span></div>
+          <p class="desc"><span class="pl">4 Sake Tataki, 4 Rainbow Roll, 4 Geisha Roll, 4 Dragon Roll, 4 Alaska Roll, 5 Sashimi Roll.</span></p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-body" style="padding-top:18px;">
+          <div class="card-top"><h3><span class="num">35.</span>Deluxe Nigiri &amp; Roll Set A</h3><span class="price">210 zł</span></div>
+          <p class="desc"><span class="pl">12 Nigiri (do wyboru), 4 California Sake, 5 Philadelphia Roll, 5 Sake Futo Maki, 3 Hosomaki łosoś, 3 Hosomaki ogórek, 4 Ebi Tempura Roll.</span></p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-body" style="padding-top:18px;">
+          <div class="card-top"><h3><span class="num">36.</span>Deluxe Nigiri &amp; Roll Set B</h3><span class="price">270 zł</span></div>
+          <p class="desc"><span class="pl">20 Nigiri (do wyboru), 6 Hosomaki, 4 California Sake, 5 Philadelphia Roll, 5 Sake Futo Maki, 4 Ebi Tempura Roll.</span></p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-body" style="padding-top:18px;">
+          <div class="card-top"><h3><span class="num">37.</span>Mixed Sushi Set</h3><span class="price">200 zł</span></div>
+          <p class="desc"><span class="pl">8 Nigiri (do wyboru), 12 Sashimi, 5 Philadelphia Roll, 5 Sake Futo Maki.</span></p>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div>Myeong Chon 명촌 — Wrocław</div>
+  <a class="back-link" href="menu.html">← Wróć do wyboru menu</a>
+</footer>
+
+<script>
+  const buttons = document.querySelectorAll('.filter-btn');
+  const sections = document.querySelectorAll('.category');
+  buttons.forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      buttons.forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      const target = btn.dataset.target;
+      if(target==='all'){
+        sections.forEach(s=>s.style.display='block');
+      } else {
+        sections.forEach(s=>{
+          s.style.display = (s.id===target) ? 'block' : 'none';
+        });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
