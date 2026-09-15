@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dania Koreańskie — Menu — Myeong Chon 명촌</title>
+<meta name="description" content="Dania koreańskie — pełne menu z cenami: przystawki, zupy, ryże, grill, kurczak, duże zupy, BBQ, napoje. Myeong Chon, Wrocław.">
+<style>
+  :root{
+    --ink:#141414;
+    --slate:#1c1e20;
+    --slate-2:#25282b;
+    --paper:#f7f3ec;
+    --red:#c0392b;
+    --red-2:#e0533f;
+    --gold:#c9a15a;
+    --line:rgba(247,243,236,0.12);
+    --muted:#a9a49b;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--ink);
+    color:var(--paper);
+    font-family:'Noto Sans','Helvetica Neue',Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:Georgia,'Times New Roman',serif; font-weight:600; margin:0;}
+
+  .hero{
+    position:relative;
+    min-height:38vh;
+    display:flex;
+    align-items:flex-end;
+    background:
+      linear-gradient(180deg, rgba(10,10,10,0.4) 0%, rgba(10,10,10,0.6) 40%, var(--ink) 100%),
+      url('img/dania/samgyeobsal.jpg') center 35%/cover no-repeat;
+    padding:32px 6vw 40px;
+  }
+  .hero-inner{max-width:1100px; margin:0 auto; width:100%;}
+  .eyebrow{color:var(--red-2); letter-spacing:0.14em; font-size:13px; font-weight:600; margin-bottom:10px;}
+  .hero h1{font-size:clamp(30px,5.6vw,58px); line-height:1.05; color:var(--paper);}
+  .hero p{color:var(--muted); max-width:50ch; margin-top:14px; font-size:16px; line-height:1.5;}
+
+  .filters-wrap{
+    position:sticky; top:0; z-index:20;
+    background:rgba(20,20,20,0.94);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .filters{
+    max-width:1100px; margin:0 auto; display:flex; gap:8px;
+    overflow-x:auto; padding:14px 6vw; scrollbar-width:none;
+  }
+  .filters::-webkit-scrollbar{display:none;}
+  .filter-btn{
+    flex:0 0 auto; background:transparent; border:1px solid var(--line);
+    color:var(--muted); padding:9px 16px; border-radius:999px;
+    font-size:13.5px; cursor:pointer; white-space:nowrap; transition:all .18s ease;
+  }
+  .filter-btn:hover{border-color:var(--red-2); color:var(--paper);}
+  .filter-btn.active{background:var(--red); border-color:var(--red); color:#fff;}
+
+  main{max-width:1100px; margin:0 auto; padding:10px 6vw 80px;}
+  .category{padding-top:56px;}
+  .category:first-child{padding-top:40px;}
+  .cat-head{
+    display:flex; align-items:baseline; gap:16px; margin-bottom:10px;
+    border-bottom:1px solid var(--line); padding-bottom:16px;
+  }
+  .cat-head h2{font-size:clamp(22px,3.2vw,32px); color:var(--paper);}
+  .cat-sub{color:var(--muted); font-size:14px; margin:8px 0 24px;}
+  .cat-note{color:var(--gold); font-size:13px; font-style:italic;}
+
+  .grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(260px,1fr)); gap:22px;}
+
+  .card{
+    background:var(--slate); border:1px solid var(--line); border-radius:10px;
+    overflow:hidden; display:flex; flex-direction:column;
+    transition:transform .2s ease, border-color .2s ease;
+  }
+  .card:hover{transform:translateY(-3px); border-color:rgba(224,83,63,0.4);}
+  .card .photo{aspect-ratio:4/3; overflow:hidden; background:var(--slate-2);}
+  .card .photo img{width:100%; height:100%; object-fit:cover; display:block;}
+  .card-body{padding:16px 18px 18px; display:flex; flex-direction:column; gap:8px; flex:1;}
+  .card-body.no-photo{padding-top:18px;}
+  .card-top{display:flex; justify-content:space-between; align-items:baseline; gap:10px;}
+  .card-top h3{font-size:16.5px; color:var(--paper); line-height:1.3;}
+  .kor{display:block; font-size:12px; color:var(--muted); font-weight:400; margin-bottom:2px;}
+  .num{color:var(--red-2); font-weight:700; margin-right:6px; font-size:14px;}
+  .price{font-family:Georgia,serif; font-size:18px; color:var(--gold); white-space:nowrap; flex:0 0 auto;}
+  .desc{color:var(--muted); font-size:13.5px; line-height:1.55;}
+  .desc .pl{color:#cfcac0;}
+  .tag{
+    display:inline-block; background:var(--red); color:#fff; font-size:10.5px;
+    font-weight:700; letter-spacing:.04em; padding:2px 8px; border-radius:4px; margin-right:8px;
+  }
+  .tag.best{background:var(--gold); color:#141414;}
+
+  footer{text-align:center; padding:40px 6vw 60px; color:var(--muted); font-size:13px; border-top:1px solid var(--line);}
+  .back-link{display:inline-block; margin-top:14px; color:var(--paper);}
+
+  @media (max-width:520px){
+    .grid{grid-template-columns:1fr;}
+    .hero{min-height:32vh; padding:24px 5vw 30px;}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">MYEONG CHON 명촌</div>
+    <h1>Dania Koreańskie</h1>
+    <p>Przystawki, zupy, dania z ryżem, grill, smażony kurczak i BBQ party — autentyczna kuchnia koreańska.</p>
+  </div>
+</header>
+
+<div class="filters-wrap">
+  <nav class="filters" id="filters">
+    <button class="filter-btn active" data-target="all">Wszystko</button>
+    <button class="filter-btn" data-target="przystawki">Przystawki</button>
+    <button class="filter-btn" data-target="zupyryz">Zupy i ryż</button>
+    <button class="filter-btn" data-target="makarony">Makarony i kluski</button>
+    <button class="filter-btn" data-target="koreanskie">Dania koreańskie</button>
+    <button class="filter-btn" data-target="kurczak">Smażony kurczak</button>
+    <button class="filter-btn" data-target="wieprzowina">Wieprzowina i golonka</button>
+    <button class="filter-btn" data-target="dodatki">Dodatki na gorąco</button>
+    <button class="filter-btn" data-target="duzezupy">Duże zupy</button>
+    <button class="filter-btn" data-target="duzezupy2">Duże zupy II</button>
+    <button class="filter-btn" data-target="grill">Grill / BBQ</button>
+    <button class="filter-btn" data-target="napoje">Napoje i alkohole</button>
+  </nav>
+</div>
+
+<main>
+
+  <!-- PRZYSTAWKI -->
+  <section class="category" id="przystawki">
+    <div class="cat-head"><h2>Przystawki</h2></div>
+    <div class="grid">
+
+      <article class="card"><div class="photo"><img src="img/dania/gunmandu.jpg" alt="Gun mandu" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">1.</span><span class="kor">군만두</span>Gun mandu (7 szt.)</h3><span class="price">20 zł</span></div>
+        <p class="desc"><span class="pl">Smażone pierogi z kurczakiem i warzywami.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/gogimandu.jpg" alt="Gogi zzin mandu" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="tag">NEW</span><span class="num">1.1</span><span class="kor">수제 고기 찐만두</span>Gogi zzin mandu (5 szt.)</h3><span class="price">50 zł</span></div>
+        <p class="desc"><span class="pl">Domowe pierożki na parze z mięsem (wieprzowina i wołowina), tofu, warzywami i makaronem. Czas gotowania: 30 minut.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/saewoo.jpg" alt="Saewoo twigim" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">2.</span><span class="kor">새우튀김</span>Saewoo twigim (6 szt.)</h3><span class="price">50 zł</span></div>
+        <p class="desc"><span class="pl">Smażone krewetki w cieście z mąki pszennej.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/haemul.jpg" alt="Haemul Pajeon" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">3.</span><span class="kor">해물파전</span>Haemul Pajeon</h3><span class="price">80 zł</span></div>
+        <p class="desc"><span class="pl">Naleśnik z różnych rodzajów owoców morza wymieszanych z ciastem mącznym.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/yukjeon.jpg" alt="Yukjeon" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">4.</span><span class="kor">육전</span>Yukjeon</h3><span class="price">100 zł</span></div>
+        <p class="desc"><span class="pl">Cienko pokrojona wołowina smażona w cieście jajecznym.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/yukhoe.jpg" alt="Yukhoe" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">5.</span><span class="kor">육회</span>Yukhoe</h3><span class="price">100 zł</span></div>
+        <p class="desc"><span class="pl">Danie z surowego mięsa wołowego z dodatkiem orzechów piniowych i jajkiem.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/dakddonggib.jpg" alt="Dakddonggib" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">6.</span><span class="kor">닭똥집 튀김 OR 볶음</span>Dakddonggib (twigim/bbokeum)</h3><span class="price">80 zł</span></div>
+        <p class="desc"><span class="pl">Żołądek kurczaka smażony w głębokim oleju lub na patelni.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/godeungeo.jpg" alt="Godeungeo Gui" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">7.</span><span class="kor">고등어 구이</span>Godeungeo Gui — Grilled Mackerel</h3><span class="price">55 zł</span></div>
+        <p class="desc"><span class="pl">Grillowana makrela.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/ttukbaegi.jpg" alt="Ttukbaegi Bulgogi" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">8.</span><span class="kor">뚝배기 불고기</span>Ttukbaegi — Bulgogi</h3><span class="price">60 zł</span></div>
+        <p class="desc"><span class="pl">Plastry bulgogi wołowego z warzywami i makaronem ziemniaczanym w gorącym garnku.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/donkatsu.jpg" alt="Donkatsu" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">9.</span><span class="kor">돈까스</span>Donkatsu</h3><span class="price">60 zł</span></div>
+        <p class="desc"><span class="pl">Kotlet schabowy z sosem na górze, daikon, sałatka z ketchupem i majonezem, ryż.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/fishkatsu.jpg" alt="Fish katsu" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="tag">NEW</span><span class="num">9.1</span><span class="kor">생선까스</span>Fish katsu</h3><span class="price">60 zł</span></div>
+        <p class="desc"><span class="pl">Panierowane filety z dorsza smażone w głębokim tłuszczu, aż będą chrupiące. Podawany z sosem tatarskim.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/tteogbokki.jpg" alt="Tteogbokk-i" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">10.</span><span class="kor">떡볶이</span>Tteogbokk-i</h3><span class="price">55 zł</span></div>
+        <p class="desc"><span class="pl">Ciasteczka ryżowe duszone z ostro-słodką pastą gochujang, warzywa, kotleciki rybne, ugotowane jajko.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/rosetteok.jpg" alt="ROSE Tteogbokk-i" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="tag">NEW</span><span class="num">10.1</span><span class="kor">로제떡볶이</span>ROSE Tteogbokk-i</h3><span class="price">55 zł</span></div>
+        <p class="desc"><span class="pl">Fusion tteokbokki z sosem pomidorowym, mlekiem, śmietaną i boczkiem, tworząc pikantny sos gochujang.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/kimbap.jpg" alt="Kimbap" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">11.</span><span class="kor">김밥</span>Kimbap (warzywny/oryginalny/wołowy/tuńczyk)</h3><span class="price">35 / 40 zł</span></div>
+        <p class="desc"><span class="pl">Gotowany ryż, różne rodzaje warzyw, szynka i surimi, zawinięte w gim, podawane w małych plasterkach.</span></p></div></article>
+
+    </div>
+  </section>
+
+  <!-- ZUPY I RYZ -->
+  <section class="category" id="zupyryz">
+    <div class="cat-head"><h2>Zupy i dania z ryżem</h2></div>
+    <div class="grid">
+
+      <article class="card"><div class="photo"><img src="img/dania/chadoljjigae.jpg" alt="Chadol deonjang jjigae" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">12.</span><span class="kor">차돌 된장찌개</span>Chadol deonjang jjigae</h3><span class="price">60 zł</span></div>
+        <p class="desc"><span class="pl">Zupa z pasty sojowej z tofu, warzywami i mostkiem wołowym z ryżem.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/chadolcheong.jpg" alt="Chadol cheonggukjjang" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">13.</span><span class="kor">차돌 청국장</span>Chadol cheonggukjjang</h3><span class="price">60 zł</span></div>
+        <p class="desc"><span class="pl">Bogata zupa z pasty sojowej z tofu, warzywami, mostkiem wołowym i ryżem.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/sundubu.jpg" alt="Sundubu jjigae" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">14.</span><span class="kor">순두부 찌개</span>Sundubu jjigae</h3><span class="price">60 zł</span></div>
+        <p class="desc"><span class="pl">Pikantna zupa z tofu, warzywami, z ryżem.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/kimchijjigae.jpg" alt="Kimchi jjigae" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">15.</span><span class="kor">돼지/참치 김치 찌개</span>Kimchi jjigae (wieprzowina lub tuńczyk)</h3><span class="price">55 zł</span></div>
+        <p class="desc"><span class="pl">Zupa kimchi, tofu, boczek wieprzowy lub tuńczyk i warzywa z ryżem.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/whangtae.jpg" alt="Whangtae haejangguk" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">16.</span><span class="kor">황태 해장국</span>Whangtae haejangguk — shredded pollack soup</h3><span class="price">65 zł</span></div>
+        <p class="desc"><span class="pl">Mielony mintaj gotowany w bulionie z grzybami, kiełkami fasoli, rzodkiewkami.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/jjamppongbab.jpg" alt="Jjamppong bab" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">17.</span><span class="kor">짬뽕밥</span>Jjamppong bab</h3><span class="price">65 zł</span></div>
+        <p class="desc"><span class="pl">Pikantna zupa z mostkiem wołowym, owocami morza i warzywami z ryżem.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/kimchibokeumbab.jpg" alt="Kimchi bbokeumbab" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">18.</span><span class="kor">김치 볶음밥</span>Kimchi bbokeumbab</h3><span class="price">55 zł</span></div>
+        <p class="desc"><span class="pl">Smażony ryż z kimchi, wieprzowiną i boczkiem.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/dwaejibulbaeg.jpg" alt="Dwaejibulbaeg" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">19.</span><span class="kor">돼지 불백</span>Dwaejibulbaeg</h3><span class="price">55 zł</span></div>
+        <p class="desc"><span class="pl">Wieprzowina marynowana w sosie sojowym i grillowana, podawana z ryżem.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/jaeyukdeopbab.jpg" alt="Jaeyuk deopbab" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">20.</span><span class="kor">제육덮밥</span>Jaeyuk deopbab</h3><span class="price">55 zł</span></div>
+        <p class="desc"><span class="pl">Boczek smażony z warzywami, podawany z ryżem.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/bulgogideopbab.jpg" alt="Bulgogi deopbab" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">21.</span><span class="kor">불고기덮밥</span>Bulgogi deopbab</h3><span class="price">60 zł</span></div>
+        <p class="desc"><span class="pl">Marynowana wołowina z warzywami, podawana z ryżem.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/ojingodeopbab.jpg" alt="Ojing-o deopbab" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">22.</span><span class="kor">오징어덮밥</span>Ojing-o deopbab</h3><span class="price">60 zł</span></div>
+        <p class="desc"><span class="pl">Smażone kalmary, warzywa podawane z ryżem.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/saewoobokeumbab.jpg" alt="Saewoo bokeumbab" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">23.</span><span class="kor">새우볶음밥</span>Saewoo bokeumbab</h3><span class="price">60 zł</span></div>
+        <p class="desc"><span class="pl">Smażony ryż z warzywami i krewetkami z sosem z pasty z czarnej fasoli.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/bibimbab.jpg" alt="Bibimbab" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">24.</span><span class="kor">비빔밥</span>Bibimbab <em>(Beef → Tofu)</em></h3><span class="price">55 zł</span></div>
+        <p class="desc"><span class="pl">Ryż z warzywami, wołowiną, jajkiem i ostrą pastą chilli.</span></p></div></article>
+
+    </div>
+  </section>
+
+  <!-- MAKARONY -->
+  <section class="category" id="makarony">
+    <div class="cat-head"><h2>Makarony, kluski i dania mięsne</h2></div>
+    <div class="grid">
+
+      <article class="card"><div class="photo"><img src="img/dania/tteokgalbi.jpg" alt="Tteok-galbi" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">25.</span><span class="kor">수제 떡갈비</span>Tteok-galbi</h3><span class="price">55 zł</span></div>
+        <p class="desc"><span class="pl">Koreańskie danie z wołowiny, przygotowane z mielonych krótkich żeberek wołowych.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/gamjasujebi.jpg" alt="Gamja sujebi" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">26.</span><span class="kor">감자 손수제비</span>Gamja sujebi</h3><span class="price">50 zł</span></div>
+        <p class="desc"><span class="pl">Zupa z kawałków ciasta pszennego gotowanych w bulionie anchois z ziemniakami, dynią.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/galbitang.jpg" alt="Galbitang" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">27.</span><span class="kor">갈비탕</span>Galbitang — beef ribs soup</h3><span class="price">65 zł</span></div>
+        <p class="desc"><span class="pl">Żeberka wołowe długo gotowane na kości. Gęsty, bogaty bulion i delikatne mięso.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/dwaejigugbab.jpg" alt="Dwaeji gugbab" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">28.</span><span class="kor">돼지국밥</span>Dwaeji gugbab — Pork soup</h3><span class="price">60 zł</span></div>
+        <p class="desc"><span class="pl">Zupa gotowana na kościach i mięsie wieprzowym z dodatkiem plastrów mięsa.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/jjamppong.jpg" alt="Jjamppong" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">29.</span><span class="kor">짬뽕</span>Jjamppong</h3><span class="price">65 zł</span></div>
+        <p class="desc"><span class="pl">Pikantna zupa z pszenicznym makaronem, owocami morza, mostkiem wołowym i warzywami.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/haemulkalguksu.jpg" alt="Haemul kalguksu" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">30.</span><span class="kor">해물 칼국수</span>Haemul kalguksu</h3><span class="price">65 zł</span></div>
+        <p class="desc"><span class="pl">Zupa z różnymi owocami morza i pszenicznym makaronem.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/twigimudong.jpg" alt="Twigim U-dong" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">00.</span><span class="kor">튀김우동</span>Twigim U-dong</h3><span class="price">50 zł</span></div>
+        <p class="desc"><span class="pl">Makaron udon z chrupiącą smażoną potrawą w bulionie z płatkami bonito.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/guksu.jpg" alt="Guksu" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">31.</span><span class="kor">잔치 국수</span>Guksu</h3><span class="price">50 zł</span></div>
+        <p class="desc"><span class="pl">Makaron z mąki pszennej zawijany w bulionie z anchois.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/ramen.jpg" alt="Ramen" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">32.</span><span class="kor">라면</span>Ramen</h3><span class="price">30 zł</span></div>
+        <p class="desc"><span class="pl">Ostra zupa z pszenicznym makaronem, warzywami i jajkiem.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/jajangmyeon.jpg" alt="Jajangmyeon" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">33.</span><span class="kor">자장면</span>Jajangmyeon</h3><span class="price">50 zł</span></div>
+        <p class="desc"><span class="pl">Pszeniczny makaron z sosem z pasty z czarnej fasoli, kawałkami wieprzowiny i warzywami.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/mulnaengmyeon.jpg" alt="Mul naengmyeon" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">34.</span><span class="kor">물냉면</span>Mul naengmyeon</h3><span class="price">55 zł</span></div>
+        <p class="desc"><span class="pl">Zupa z zimnym czarnym gryczanym makaronem z warzywami i mięsem wołowym.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/bibimnaengmyeon.jpg" alt="Bibim naengmyeon" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">35.</span><span class="kor">비빔냉면</span>Bibim naengmyeon</h3><span class="price">55 zł</span></div>
+        <p class="desc"><span class="pl">Zimny czarny gryczany makaron z warzywami, mięsem wołowym i ostrym sosem.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/naengmomil.jpg" alt="Naeng momil" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">36.</span><span class="kor">냉모밀</span>Naeng momil</h3><span class="price">55 zł</span></div>
+        <p class="desc"><span class="pl">Zimna zupa z makaronem gryczanym i warzywami.</span></p></div></article>
+
+    </div>
+  </section>
+
+  <!-- DANIA KOREANSKIE (smazone) -->
+  <section class="category" id="koreanskie">
+    <div class="cat-head"><h2>Dania Koreańskie</h2></div>
+    <div class="grid">
+
+      <article class="card"><div class="photo"><img src="img/dania/dakbal.jpg" alt="Boneless dakbal" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="tag">NEW</span><span class="num">000.</span><span class="kor">무뼈닭발 +주먹밥</span>Boneless dakbal + jumeogbab</h3><span class="price">100 zł</span></div>
+        <p class="desc"><span class="pl">Bezkostne nóżki kurczaka smażone w pikantnym sosie. Podawane z kulkami ryżowymi.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/tangsuyuk.jpg" alt="Tangsuyuk" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">37.</span><span class="kor">탕수육</span>Tangsuyuk</h3><span class="price">110 zł</span></div>
+        <p class="desc"><span class="pl">Słodko-kwaśna wieprzowina, smażona z warzywami.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/kkanpungsaeu.jpg" alt="Kkanpung saeu" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">38.</span><span class="kor">깐풍 새우</span>Kkanpung saeu</h3><span class="price">150 zł</span></div>
+        <p class="desc"><span class="pl">Ostre smażone czosnkowe krewetki, imbir, sos sojowy.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/youringi.jpg" alt="Youringi" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">39.</span><span class="kor">유린기</span>Youringi</h3><span class="price">120 zł</span></div>
+        <p class="desc"><span class="pl">Smażony kurczak z chrupiącymi warzywami w kwaśnym sosie sojowym, zielona i czerwona papryka.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/kkanpungki.jpg" alt="Kkanpung-ki" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">40.</span><span class="kor">깐풍기</span>Kkanpung-ki</h3><span class="price">120 zł</span></div>
+        <p class="desc"><span class="pl">Smażona pierś kurczaka, imbir, sos sojowy.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/jaeyukbbokeum.jpg" alt="Jaeyuk bbokeum" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">41.</span><span class="kor">제육볶음</span>Jaeyuk bbokeum</h3><span class="price">120 zł</span></div>
+        <p class="desc"><span class="pl">Smażona wieprzowina z ostrym sosem pasty gochujang.</span></p></div></article>
+
+    </div>
+  </section>
+
+  <!-- SMAZONY KURCZAK -->
+  <section class="category" id="kurczak">
+    <div class="cat-head"><h2>Smażony kurczak</h2></div>
+    <p class="cat-sub">*순살치킨가능 — boneless chicken available, dostępny kurczak bez kości</p>
+    <div class="grid">
+
+      <article class="card"><div class="photo"><img src="img/dania/friedchicken.jpg" alt="Fried chicken" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">42.</span><span class="kor">후라이드 치킨</span>Fried chicken</h3><span class="price">80 zł</span></div>
+        <p class="desc"><span class="pl">Smażone skrzydełka kurczaka, sałatka z ketchupem i majonezem.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/maekomchicken.jpg" alt="Maekom ganjang chicken" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">43.</span><span class="kor">매콤간장치킨</span>Maekom ganjang chicken</h3><span class="price">90 zł</span></div>
+        <p class="desc"><span class="pl">Koreańskie smażone skrzydełko kurczaka doprawione ostrym sosem sojowym, czosnkiem, cukrem.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/yangyeomchicken.jpg" alt="Yangyeom chicken" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">44.</span><span class="kor">양념치킨</span>Yangyeom chicken</h3><span class="price">90 zł</span></div>
+        <p class="desc"><span class="pl">Kurczak doprawiony sosem słodko-ostrym, czosnkiem, cukrem i orzechami ziemnymi.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/honeygarlicchicken.jpg" alt="Honey garlic butter chicken" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">45.</span><span class="kor">허니갈릭버터치킨</span>Honey garlic butter chicken</h3><span class="price">90 zł</span></div>
+        <p class="desc"><span class="pl">Skrzydełka kurczaka przyprawione miodem, czosnkiem, masłem i innymi przyprawami.</span></p></div></article>
+
+    </div>
+  </section>
+
+  <!-- WIEPRZOWINA / GOLONKA -->
+  <section class="category" id="wieprzowina">
+    <div class="cat-head"><h2>Wieprzowina, golonka i podroby</h2></div>
+    <div class="grid">
+
+      <article class="card"><div class="photo"><img src="img/dania/zokbal.jpg" alt="Zokbal" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">46.</span><span class="kor">족발</span>Zokbal</h3><span class="price">170 zł</span></div>
+        <p class="desc"><span class="pl">Duszone, przyprawione golonki z sosem sojowym.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/bulzokbal.jpg" alt="Bul zokbal" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">47.</span><span class="kor">불족발</span>Bul zokbal</h3><span class="price">170 zł</span></div>
+        <p class="desc"><span class="pl">Duszona, sezonowana golonka wieprzowa z pikantnym sosem pastowym.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/nangchaezokbal.jpg" alt="Nangchae zokbal" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">48.</span><span class="kor">냉채족발</span>Nangchae zokbal</h3><span class="price">170 zł</span></div>
+        <p class="desc"><span class="pl">Miękkie, pikantne nóżki wieprzowe z chrupiącymi warzywami i pikantnym sosem musztardowym.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/sogalbijjim.jpg" alt="Sogalbi Jjim" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">49.</span><span class="kor">매운 소갈비찜</span>Sogalbi Jjim</h3><span class="price">180 zł</span></div>
+        <p class="desc"><span class="pl">Pikantny gulasz na bazie sosu sojowego z dodatkiem żeberek wołowych.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/hangjeongsuyuk.jpg" alt="Hangjeong Suyuk" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="tag best">BEST</span><span class="num">50.</span><span class="kor">항정수육</span>Hangjeong Suyuk</h3><span class="price">150 zł</span></div>
+        <p class="desc"><span class="pl">Gotowana karkówka wieprzowa na parze z grzybami i szczypiorkiem.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/dubukimchi.jpg" alt="Dubu kimchi" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">51.</span><span class="kor">두부김치</span>Dubu kimchi</h3><span class="price">120 zł</span></div>
+        <p class="desc"><span class="pl">Tofu podawane razem ze smażoną wieprzowiną oraz smażonym kimchi.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/samgyeobsal.jpg" alt="Tongmaneal samgyeobsal" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">52.</span><span class="kor">통마늘 삼겹살</span>Tongmaneal samgyeobsal</h3><span class="price">140 zł</span></div>
+        <p class="desc"><span class="pl">Smażone na grillu plastry boczku wieprzowego, z czosnkiem i cebulą.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/hangjeongsal.jpg" alt="Tongmaneal hangjeongsal" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">53.</span><span class="kor">통마늘 항정살</span>Tongmaneal hangjeongsal</h3><span class="price">160 zł</span></div>
+        <p class="desc"><span class="pl">Smażone na grillu plastry karkówki wieprzowej, z czosnkiem i cebulą.</span></p></div></article>
+
+    </div>
+  </section>
+
+  <!-- DODATKI NA GORACO -->
+  <section class="category" id="dodatki">
+    <div class="cat-head"><h2>Na gorącym talerzu</h2></div>
+    <div class="grid">
+
+      <article class="card"><div class="photo"><img src="img/dania/jeokseokttokpoki.jpg" alt="Jeokseok Ttokpoki" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">54.</span><span class="kor">즉석 떡볶이</span>Jeokseok Ttokpoki</h3><span class="price">140 zł</span></div>
+        <p class="desc"><span class="pl">Ciasteczka ryżowe duszone z ostro-słodką pastą gochujang, warzywa, kotleciki rybne, jajka na twardo z miksem smażonych dodatków. Dodatki: 차돌 beef brisket / 치즈 cheese — +10 zł.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/chadolsukju.jpg" alt="Chadol sukjubbokeum" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">55.</span><span class="kor">차돌 숙주볶음</span>Chadol sukjubbokeum</h3><span class="price">170 zł</span></div>
+        <p class="desc"><span class="pl">Smażone kiełki fasoli mung z mostkiem wołowym.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/golbengi.jpg" alt="Golbengi muchim sari" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">56.</span><span class="kor">골뱅이 무침사리</span>Golbengi muchim sari</h3><span class="price">170 zł</span></div>
+        <p class="desc"><span class="pl">Gotowane ślimaki (zwójki) z warzywami, ostry sos z makaronem.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/makchang.jpg" alt="Makchang gui" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="tag best">BEST</span><span class="num">57.</span><span class="kor">막창구이</span>Makchang gui</h3><span class="price">160 zł</span></div>
+        <p class="desc"><span class="pl">Jelita wieprzowe grillowane i podawane na gorącym talerzu.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/bulmakchang.jpg" alt="Bul Makchang gui" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">58.</span><span class="kor">불 막창구이</span>Bul Makchang gui</h3><span class="price">160 zł</span></div>
+        <p class="desc"><span class="pl">Jelita wieprzowe grillowane z pikantnym sosem pastowym, podawane na gorącym talerzu.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/jangeogui.jpg" alt="Jang-eogu-i" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="tag best">BEST</span><span class="num">59.</span><span class="kor">장어구이</span>Jang-eogu-i (400g)</h3><span class="price">200 zł</span></div>
+        <p class="desc"><span class="pl">Grillowany węgorz.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/nakjibbokeum.jpg" alt="Nakgi bbokeum someon" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">60.</span><span class="kor">낙지 볶음 소면</span>Nakgi bbokeum someon</h3><span class="price">250 zł</span></div>
+        <p class="desc"><span class="pl">Smażona ośmiornica z ostrym sosem z pasty gochujang i syropem kukurydzianym.</span></p></div></article>
+
+    </div>
+  </section>
+
+  <!-- DUZE ZUPY -->
+  <section class="category" id="duzezupy">
+    <div class="cat-head"><h2>Duże zupy · Large soups</h2></div>
+    <div class="grid">
+
+      <article class="card"><div class="photo"><img src="img/dania/gamjatang.jpg" alt="Gamjatang" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">61.</span><span class="kor">감자탕</span>Gamjatang</h3><span class="price">170 zł</span></div>
+        <p class="desc"><span class="pl">Koreańska zupa z szyi wieprzowej, ziemniaki i warzywa.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/odengtang.jpg" alt="Odengtang" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">62.</span><span class="kor">오뎅탕</span>Odengtang</h3><span class="price">150 zł</span></div>
+        <p class="desc"><span class="pl">Zupa z kotlecikami rybnymi.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/doganiodeng.jpg" alt="Dogani odengtang" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">63.</span><span class="kor">도가니 오뎅탕</span>Dogani odengtang</h3><span class="price">180 zł</span></div>
+        <p class="desc"><span class="pl">Zupa z placków rybnych i golonki wołowej.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/budaejjigae.jpg" alt="Budaejjigae" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">64.</span><span class="kor">부대찌개</span>Budaejjigae</h3><span class="price">160 zł</span></div>
+        <p class="desc"><span class="pl">Ostra zupa z wieprzowiną, szynką, kiełbasą, czerwoną fasolą, kimchi, tofu i makaronem. *소자 Small — 90 zł.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/chadoldoenjangjeongol.jpg" alt="Chadol doenjang jeongol" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">65.</span><span class="kor">차돌 된장 전골</span>Chadol doenjang jeongol</h3><span class="price">150 zł</span></div>
+        <p class="desc"><span class="pl">Zupa z pasty sojowej z tofu, warzywami i mostkiem wołowym.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/chadolcheongjeongol.jpg" alt="Chadol cheong-gukjang" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">66.</span><span class="kor">차돌 청국장 전골</span>Chadol cheong-gukjang</h3><span class="price">150 zł</span></div>
+        <p class="desc"><span class="pl">Bogata zupa z pasty sojowej z tofu, warzywami i mostkiem wołowym.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/kimchijeongol.jpg" alt="Kimchijeongol" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">67.</span><span class="kor">김치전골</span>Kimchijeongol</h3><span class="price">140 zł</span></div>
+        <p class="desc"><span class="pl">Zupa z koreańskiej kapusty pekińskiej kimchi z wołowiną.</span></p></div></article>
+
+    </div>
+  </section>
+
+  <!-- DUZE ZUPY II -->
+  <section class="category" id="duzezupy2">
+    <div class="cat-head"><h2>Duże zupy — ciąg dalszy</h2></div>
+    <div class="grid">
+
+      <article class="card"><div class="photo"><img src="img/dania/sundaejeongol.jpg" alt="Sundaejeongol" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">68.</span><span class="kor">순대전골</span>Sundaejeongol</h3><span class="price">170 zł</span></div>
+        <p class="desc"><span class="pl">Zupa z koreańską kaszanką oraz z podrobami wieprzowymi.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/chadolbeosukjeongol.jpg" alt="Chadol beosuk geongol" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">69.</span><span class="kor">차돌 버섯 전골</span>Chadol beosuk geongol</h3><span class="price">170 zł</span></div>
+        <p class="desc"><span class="pl">Pikantna zupa z grzybami i mostkiem wołowym.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/doganitang.jpg" alt="Doganitang" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">70.</span><span class="kor">도가니탕</span>Doganitang — beef knee soup</h3><span class="price">170 zł</span></div>
+        <p class="desc"><span class="pl">Danie z bulionu z kości wołowych, zwane sujitang.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/jjamppongtang.jpg" alt="Jjamppongtang" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">71.</span><span class="kor">짬뽕탕</span>Jjamppongtang</h3><span class="price">180 zł</span></div>
+        <p class="desc"><span class="pl">Pikantna zupa z owoców morza, wołowina z warzywami.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/nakgobsae.jpg" alt="Nak. Gob. Sae" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="tag best">BEST</span><span class="num">72.</span><span class="kor">낙.곱.새</span>Nak. Gob. Sae</h3><span class="price">200 zł</span></div>
+        <p class="desc"><span class="pl">Gulasz z ośmiornicy, wołowych jelit i krewetek, doprawiony pikantnymi przyprawami.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/bulnakjeongol.jpg" alt="Bulnak jeongol" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">73.</span><span class="kor">불고기, 낙지 전골</span>Bulnak jeongol</h3><span class="price">250 zł</span></div>
+        <p class="desc"><span class="pl">Gulasz z ośmiornicy i delikatnej polędwicy wołowej jako głównych składników oraz różnych warzyw.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/chadolgobchangjeongol.jpg" alt="Chadol Gobchangjeongol" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="tag best">BEST</span><span class="num">74.</span><span class="kor">차돌 곱창전골</span>Chadol Gobchangjeongol</h3><span class="price">250 zł</span></div>
+        <p class="desc"><span class="pl">Pikantna zupa z jelita cienkiego krowy, przyprawami, warzywami, pszenicznym makaronem. *소자 Small — 130 zł.</span></p></div></article>
+
+    </div>
+  </section>
+
+  <!-- GRILL / BBQ -->
+  <section class="category" id="grill">
+    <div class="cat-head"><h2>GRILL — BBQ Party</h2></div>
+    <p class="cat-sub">Co najmniej 2 porcje, z wyjątkiem nr 75 (dostępne pojedyncze porcje)</p>
+    <div class="grid">
+
+      <article class="card"><div class="photo"><img src="img/dania/grillset.jpg" alt="Zestaw grillowy" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="num">75.</span><span class="kor">철판 불고기</span>Cheolpan-bulgogi (400g)</h3><span class="price">140 zł</span></div>
+        <p class="desc"><span class="pl">Pokrojona wołowina, sos sojowy z warzywami i makaronem szklanym. Dostępne porcje pojedyncze.</span></p></div></article>
+
+      <article class="card"><div class="card-body no-photo"><div class="card-top"><h3><span class="num">76.</span><span class="kor">항정살</span>Hangjeongsal (200g)</h3><span class="price">65 zł</span></div>
+        <p class="desc"><span class="pl">Karkówka wieprzowa, grillowana.</span></p></div></article>
+
+      <article class="card"><div class="card-body no-photo"><div class="card-top"><h3><span class="num">77.</span><span class="kor">삼겹살</span>Samgyeobsal (200g)</h3><span class="price">55 zł</span></div>
+        <p class="desc"><span class="pl">Boczek wieprzowy.</span></p></div></article>
+
+      <article class="card"><div class="card-body no-photo"><div class="card-top"><h3><span class="num">78.</span><span class="kor">대패 삼겹살</span>Daepae samgyeobsal (200g)</h3><span class="price">55 zł</span></div>
+        <p class="desc"><span class="pl">Cienko pokrojony mrożony brzuch wieprzowy.</span></p></div></article>
+
+      <article class="card"><div class="card-body no-photo"><div class="card-top"><h3><span class="num">79.</span><span class="kor">차돌박이</span>Chadolbag-i (200g)</h3><span class="price">80 zł</span></div>
+        <p class="desc"><span class="pl">Plasterki mostka wołowego.</span></p></div></article>
+
+    </div>
+  </section>
+
+  <!-- NAPOJE -->
+  <section class="category" id="napoje">
+    <div class="cat-head"><h2>Napoje &amp; Alkohole</h2></div>
+    <p class="cat-sub">*탄산수 원하시면, 직원에게 알려주세요 — jeśli chcesz wodę gazowaną, poproś o nią pracownika obsługi.</p>
+    <div class="grid">
+
+      <article class="card"><div class="photo"><img src="img/dania/beer.jpg" alt="Piwo" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="kor">맥주</span>Piwo (Tyskie)</h3><span class="price">15 zł</span></div></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/draftbeer.jpg" alt="Draft Beer" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="kor">생맥주</span>Draft Beer — 0.5L</h3><span class="price">18 zł</span></div>
+        <p class="desc"><span class="pl">Lech Premium lub Kozel Czarny.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/soju.jpg" alt="Soju" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="kor">소주</span>Soju — 16% Alc</h3><span class="price">55 zł</span></div>
+        <p class="desc"><span class="pl">Klasyczne soju.</span></p></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/saerosoju.jpg" alt="Saero soju" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="kor">새로 소주</span>Saero soju (bez cukru) — 16% Alc</h3><span class="price">55 zł</span></div></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/fruitsoju.jpg" alt="Owocowe soju" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="kor">과일맛 소주</span>Owocowe soju — 13% Alc</h3><span class="price">55 zł</span></div></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/hawyo.jpg" alt="Hawyo soju" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="kor">화요 소주</span>Hawyo soju — 25% Alc (375ml)</h3><span class="price">110 zł</span></div></div></article>
+
+      <article class="card"><div class="photo"><img src="img/dania/makgeolli.jpg" alt="Makgeolli" loading="lazy"></div>
+        <div class="card-body"><div class="card-top"><h3><span class="kor">막걸리</span>Makgeolli — 6% Alc / Alba Makgeolli — 4% Alc</h3><span class="price">50 zł</span></div></div></article>
+
+      <article class="card"><div class="card-body no-photo"><div class="card-top"><h3><span class="kor">하이볼 칵테일</span>High Ball Cocktail</h3><span class="price">25 zł</span></div>
+        <p class="desc"><span class="pl">Lemon juice, Jameson whisky, Schweppes.</span></p></div></article>
+
+      <article class="card"><div class="card-body no-photo"><div class="card-top"><h3><span class="kor">음료</span>Napoje (Pepsi, 7-up, Milkis, Mirinda, Mountain Dew, Lemoniada)</h3><span class="price">10 zł</span></div></div></article>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div>Myeong Chon 명촌 — Wrocław</div>
+  <a class="back-link" href="menu.html">← Wróć do wyboru menu</a>
+</footer>
+
+<script>
+  const buttons = document.querySelectorAll('.filter-btn');
+  const sections = document.querySelectorAll('.category');
+  buttons.forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      buttons.forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      const target = btn.dataset.target;
+      if(target==='all'){
+        sections.forEach(s=>s.style.display='block');
+      } else {
+        sections.forEach(s=>{ s.style.display = (s.id===target) ? 'block' : 'none'; });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
