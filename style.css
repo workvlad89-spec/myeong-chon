@@ -145,6 +145,14 @@ body {
   opacity: 0.9;
 }
 
+.footer .contact {
+  margin-top: 16px;
+  font-size: 13px;
+  color: var(--cream);
+  opacity: 0.9;
+  line-height: 1.7;
+}
+
 @media (max-width: 380px) {
   .btn { padding: 14px 16px; }
 }
