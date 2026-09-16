@@ -6,38 +6,51 @@
 <title>Menu — Myeong Chon 명촌</title>
 <link rel="icon" type="image/png" href="favicon-512.png">
 <link rel="stylesheet" href="style.css">
+<style>
+.lang-switch{position:fixed;top:14px;right:14px;z-index:100;display:flex;background:rgba(20,20,20,0.85);border:1px solid rgba(255,255,255,0.15);border-radius:999px;overflow:hidden;font-family:Arial,sans-serif;}
+.lang-switch button{background:transparent;border:none;color:#a9a49b;padding:7px 14px;font-size:13px;cursor:pointer;font-weight:600;}
+.lang-switch button.active{background:#c0392b;color:#fff;}
+body:not(.lang-en) .en{display:none;}
+body.lang-en .pl{display:none;}
+</style>
 </head>
 <body>
-
+<div class="lang-switch"><button data-lang="pl" type="button">PL</button><button data-lang="en" type="button">EN</button></div>
 <img src="logo.png" alt="Myeong Chon - restauracja koreańska" class="logo">
-
 <div class="wrap">
-  <p class="tagline">Wybierz menu</p>
-
-  <div class="divider"></div>
-
-  <div class="buttons">
-
-    <a class="btn primary" href="dania-menu.html" target="_blank" rel="noopener">
-      <svg class="icon" viewBox="0 0 24 24"><path d="M6 2h9l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Zm8 1.5V8h4.5L14 3.5ZM7 12h10v1.5H7V12Zm0 4h10v1.5H7V16Zm0-8h5v1.5H7V8Z"/></svg>
-      <span class="label">
-        <span class="title">Dania Koreańskie</span>
-        <span class="sub">Grill, zupy, dodatki i napoje</span>
-      </span>
-    </a>
-
-    <a class="btn primary" href="sushi-menu.html"
-      <svg class="icon" viewBox="0 0 24 24"><path d="M6 2h9l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Zm8 1.5V8h4.5L14 3.5ZM7 12h10v1.5H7V12Zm0 4h10v1.5H7V16Zm0-8h5v1.5H7V8Z"/></svg>
-      <span class="label">
-        <span class="title">Sushi &amp; Roll</span>
-        <span class="sub">Maki, nigiri, zestawy lunchowe</span>
-      </span>
-    </a>
-
-  </div>
-
-  <a class="back" href="index.html">← Wróć</a>
+<p class="tagline"><span class="pl">Wybierz menu</span><span class="en">Choose a menu</span></p>
+<div class="divider"></div>
+<div class="buttons">
+<a class="btn primary" href="dania-menu.html" target="_blank" rel="noopener">
+<svg class="icon" viewBox="0 0 24 24"><path d="M6 2h9l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Zm8 1.5V8h4.5L14 3.5ZM7 12h10v1.5H7V12Zm0 4h10v1.5H7V16Zm0-8h5v1.5H7V8Z"/></svg>
+<span class="label">
+<span class="title"><span class="pl">Dania Koreańskie</span><span class="en">Korean Dishes</span></span>
+<span class="sub"><span class="pl">Grill, zupy, dodatki i napoje</span><span class="en">Grill, soups, sides &amp; drinks</span></span>
+</span>
+</a>
+<a class="btn primary" href="sushi-menu.html" target="_blank" rel="noopener">
+<svg class="icon" viewBox="0 0 24 24"><path d="M6 2h9l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Zm8 1.5V8h4.5L14 3.5ZM7 12h10v1.5H7V12Zm0 4h10v1.5H7V16Zm0-8h5v1.5H7V8Z"/></svg>
+<span class="label">
+<span class="title">Sushi &amp; Roll</span>
+<span class="sub"><span class="pl">Maki, nigiri, zestawy lunchowe</span><span class="en">Maki, nigiri, lunch sets</span></span>
+</span>
+</a>
 </div>
-
+<a class="back" href="index.html"><span class="pl">← Wróć</span><span class="en">← Back</span></a>
+</div>
+<script>
+(function(){
+var saved = localStorage.getItem('mc-lang') || 'pl';
+function setLang(l){
+document.body.classList.toggle('lang-en', l==='en');
+document.querySelectorAll('.lang-switch button').forEach(function(b){b.classList.toggle('active', b.dataset.lang===l);});
+localStorage.setItem('mc-lang', l);
+}
+setLang(saved);
+document.querySelectorAll('.lang-switch button').forEach(function(b){
+b.addEventListener('click', function(){ setLang(b.dataset.lang); });
+});
+})();
+</script>
 </body>
 </html>
