@@ -83,11 +83,15 @@ transition:transform .2s ease, border-color .2s ease;
 .card:hover{transform:translateY(-3px); border-color:rgba(224,83,63,0.4);}
 .card .photo{aspect-ratio:4/3; overflow:hidden; background:var(--slate-2);}
 .card .photo img{width:100%; height:100%; object-fit:cover; display:block;}
+.card .photo.duo{display:grid; grid-template-columns:1fr 1fr; gap:2px;}
+.card .photo.duo.contain{background:#fff; gap:0;}
+.card .photo.duo.contain img{object-fit:contain;}
+.card .photo.duo.contain img + img{border-left:1px solid #e3e3e3;}
 .card-body{padding:16px 18px 18px; display:flex; flex-direction:column; gap:8px; flex:1;}
 .card-body.no-photo{padding-top:18px;}
 .card-top{display:flex; justify-content:space-between; align-items:baseline; gap:10px;}
 .card-top h3{font-size:16.5px; color:var(--paper); line-height:1.3;}
-.kor{display:block; font-size:12px; color:var(--muted); font-weight:400; margin-bottom:2px;}
+.kor{display:block; font-size:12px; color:var(--muted); font-weight:400; margin-bottom:2px; word-break:keep-all;}
 .num{color:var(--red-2); font-weight:700; margin-right:6px; font-size:14px;}
 .price{font-family:Georgia,serif; font-size:18px; color:var(--gold); white-space:nowrap; flex:0 0 auto;}
 .desc{color:var(--muted); font-size:13.5px; line-height:1.55;}
@@ -154,7 +158,7 @@ footer{text-align:center; padding:40px 6vw 60px; color:var(--muted); font-size:1
 <article class="card"><div class="photo"><img src="img/dania/yukhoe.jpg" alt="Yukhoe" loading="lazy"></div>
 <div class="card-body"><div class="card-top"><h3><span class="num">5.</span><span class="kor">육회</span>Yukhoe</h3><span class="price">100 zł</span></div>
 <p class="desc"><span class="pl">Danie z surowego mięsa wołowego z dodatkiem orzechów piniowych i jajkiem.</span><span class="en">Raw beef dish topped with pine nuts and egg.</span></p></div></article>
-<article class="card"><div class="photo"><img src="img/dania/dakddonggib.jpg" alt="Dakddonggib" loading="lazy"></div>
+<article class="card"><div class="photo duo"><img src="img/dania/dakddonggib-twigim.jpg" alt="Dakddonggib twigim" loading="lazy"><img src="img/dania/dakddonggib.jpg" alt="Dakddonggib bbokeum" loading="lazy"></div>
 <div class="card-body"><div class="card-top"><h3><span class="num">6.</span><span class="kor">닭똥집 튀김 OR 볶음</span>Dakddonggib (twigim/bbokeum)</h3><span class="price">80 zł</span></div>
 <p class="desc"><span class="pl">Żołądek kurczaka smażony w głębokim oleju lub na patelni.</span><span class="en">Chicken gizzards, deep-fried or pan-fried.</span></p></div></article>
 <article class="card"><div class="photo"><img src="img/dania/godeungeo.jpg" alt="Godeungeo Gui" loading="lazy"></div>
@@ -176,7 +180,7 @@ footer{text-align:center; padding:40px 6vw 60px; color:var(--muted); font-size:1
 <div class="card-body"><div class="card-top"><h3><span class="tag">NEW</span><span class="num">10.1</span><span class="kor">로제떡볶이</span>ROSE Tteogbokk-i</h3><span class="price">55 zł</span></div>
 <p class="desc"><span class="pl">Fusion tteokbokki z sosem pomidorowym, mlekiem, śmietaną i boczkiem, tworząc pikantny sos gochujang.</span><span class="en">A fusion tteokbokki with tomato sauce, milk, cream and bacon, creating a spicy gochujang-based sauce.</span></p></div></article>
 <article class="card"><div class="photo"><img src="img/dania/kimbap.jpg" alt="Kimbap" loading="lazy"></div>
-<div class="card-body"><div class="card-top"><h3><span class="num">11.</span><span class="kor">김밥</span>Kimbap (warzywny/oryginalny/wołowy/tuńczyk)</h3><span class="price">35 / 40 zł</span></div>
+<div class="card-body"><div class="card-top"><h3><span class="num">11.</span><span class="kor">야채김밥 / 김밥 / 불고기&nbsp;김밥 / 참치김밥</span>Kimbap (warzywny / oryginalny / wołowy / tuńczyk)</h3><span class="price">35 / 40 zł</span></div>
 <p class="desc"><span class="pl">Gotowany ryż, różne rodzaje warzyw, szynka i surimi, zawinięte w gim, podawane w małych plasterkach.</span><span class="en">Cooked rice, assorted vegetables, ham and surimi wrapped in gim (seaweed), served sliced.</span></p></div></article>
 </div>
 </section>
@@ -347,7 +351,7 @@ footer{text-align:center; padding:40px 6vw 60px; color:var(--muted); font-size:1
 <section class="category" id="dodatki">
 <div class="cat-head"><h2><span class="pl">Na gorącym talerzu</span><span class="en">On a Hot Plate</span></h2></div>
 <div class="grid">
-<article class="card"><div class="photo"><img src="img/dania/jeokseokttokpoki.jpg" alt="Jeokseok Ttokpoki" loading="lazy"></div>
+<article class="card"><div class="photo duo"><img src="img/dania/jeokseokttokpoki.jpg" alt="Jeokseok Ttokpoki" loading="lazy"><img src="img/dania/jeokseokttokpoki-twigim.jpg" alt="Twigim - smażone dodatki / deep fried snacks" loading="lazy"></div>
 <div class="card-body"><div class="card-top"><h3><span class="num">54.</span><span class="kor">즉석 떡볶이</span>Jeokseok Ttokpoki</h3><span class="price">140 zł</span></div>
 <p class="desc"><span class="pl">Ciasteczka ryżowe duszone z ostro-słodką pastą gochujang, warzywa, kotleciki rybne, jajka na twardo z miksem smażonych dodatków. Dodatki: 차돌 beef brisket / 치즈 cheese — +10 zł.</span><span class="en">Rice cakes simmered in sweet-spicy gochujang paste with vegetables, fish cakes, hard-boiled eggs and a mix of fried extras. Add-ons: 차돌 beef brisket / 치즈 cheese — +10 zł.</span></p></div></article>
 <article class="card"><div class="photo"><img src="img/dania/chadolsukju.jpg" alt="Chadol sukjubbokeum" loading="lazy"></div>
@@ -421,7 +425,7 @@ footer{text-align:center; padding:40px 6vw 60px; color:var(--muted); font-size:1
 <p class="desc"><span class="pl">Gulasz z ośmiornicy i delikatnej polędwicy wołowej jako głównych składników oraz różnych warzyw.</span><span class="en">A braise featuring octopus and tender beef tenderloin as the main ingredients, with assorted vegetables.</span></p></div></article>
 <article class="card"><div class="photo"><img src="img/dania/chadolgobchangjeongol.jpg" alt="Chadol Gobchangjeongol" loading="lazy"></div>
 <div class="card-body"><div class="card-top"><h3><span class="tag best">BEST</span><span class="num">74.</span><span class="kor">차돌 곱창전골</span>Chadol Gobchangjeongol</h3><span class="price">250 zł</span></div>
-<p class="desc"><span class="pl">Pikantna zupa z jelita cienkiego krowy, przyprawami, warzywami, pszenicznym makaronem. *소자 Small — 130 zł.</span><span class="en">Spicy soup with beef small intestine, spices, vegetables and wheat noodles. *소자 Small — 130 zł.</span></p></div></article>
+<p class="desc"><span class="pl">Pikantna zupa z jelita cienkiego krowy, przyprawami, warzywami, pszenicznym makaronem. *소자 Small — 140 zł.</span><span class="en">Spicy soup with beef small intestine, spices, vegetables and wheat noodles. *소자 Small — 140 zł.</span></p></div></article>
 </div>
 </section>
 <!-- GRILL / BBQ -->
@@ -429,8 +433,7 @@ footer{text-align:center; padding:40px 6vw 60px; color:var(--muted); font-size:1
 <div class="cat-head"><h2>GRILL — BBQ Party</h2></div>
 <p class="cat-sub"><span class="pl">Co najmniej 2 porcje, z wyjątkiem nr 75 (dostępne pojedyncze porcje)</span><span class="en">Minimum 2 portions, except No. 75 (single portions available)</span></p>
 <div class="grid">
-<article class="card"><div class="photo"><img src="img/dania/grillset.jpg" alt="Zestaw grillowy" loading="lazy"></div>
-<div class="card-body"><div class="card-top"><h3><span class="num">75.</span><span class="kor">철판 불고기</span>Cheolpan-bulgogi (400g)</h3><span class="price">140 zł</span></div>
+<article class="card"><div class="card-body no-photo"><div class="card-top"><h3><span class="num">75.</span><span class="kor">철판 불고기</span>Cheolpan-bulgogi (400g)</h3><span class="price">140 zł</span></div>
 <p class="desc"><span class="pl">Pokrojona wołowina, sos sojowy z warzywami i makaronem szklanym. Dostępne porcje pojedyncze.</span><span class="en">Sliced beef in soy sauce with vegetables and glass noodles. Single portions available.</span></p></div></article>
 <article class="card"><div class="card-body no-photo"><div class="card-top"><h3><span class="num">76.</span><span class="kor">항정살</span>Hangjeongsal (200g)</h3><span class="price">65 zł</span></div>
 <p class="desc"><span class="pl">Karkówka wieprzowa, grillowana.</span><span class="en">Grilled pork neck.</span></p></div></article>
@@ -449,9 +452,9 @@ footer{text-align:center; padding:40px 6vw 60px; color:var(--muted); font-size:1
 <div class="grid">
 <article class="card"><div class="photo"><img src="img/dania/beer.jpg" alt="Piwo" loading="lazy"></div>
 <div class="card-body"><div class="card-top"><h3><span class="kor">맥주</span>Piwo (Tyskie)</h3><span class="price">15 zł</span></div></div></article>
-<article class="card"><div class="photo"><img src="img/dania/draftbeer.jpg" alt="Draft Beer" loading="lazy"></div>
+<article class="card"><div class="photo duo contain"><img src="img/dania/draftbeer.jpg" alt="Lech Premium" loading="lazy"><img src="img/dania/kozel-dark.jpg" alt="Kozel Cerny" loading="lazy"></div>
 <div class="card-body"><div class="card-top"><h3><span class="kor">생맥주</span>Draft Beer — 0.5L</h3><span class="price">18 zł</span></div>
-<p class="desc"><span class="pl">Lech Premium lub Kozel Czarny.</span><span class="en">Lech Premium or Kozel Czarny (dark).</span></p></div></article>
+<p class="desc"><span class="pl">1) 레흐 프리미엄 (LECH PREMIUM)<br>2) 코젤다크 (KOZEL CERNY)</span><span class="en">1) 레흐 프리미엄 (LECH PREMIUM)<br>2) 코젤다크 (KOZEL CERNY)</span></p></div></article>
 <article class="card"><div class="photo"><img src="img/dania/soju.jpg" alt="Soju" loading="lazy"></div>
 <div class="card-body"><div class="card-top"><h3><span class="kor">소주</span>Soju — 16% Alc</h3><span class="price">55 zł</span></div>
 <p class="desc"><span class="pl">Klasyczne soju.</span><span class="en">Classic soju.</span></p></div></article>
