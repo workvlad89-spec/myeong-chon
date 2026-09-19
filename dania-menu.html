@@ -84,6 +84,8 @@ transition:transform .2s ease, border-color .2s ease;
 .card .photo{aspect-ratio:4/3; overflow:hidden; background:var(--slate-2);}
 .card .photo img{width:100%; height:100%; object-fit:cover; display:block;}
 .card .photo.duo{display:grid; grid-template-columns:1fr 1fr; gap:2px;}
+.card .photo.contain{background:#fff;}
+.card .photo.contain img{object-fit:contain;}
 .card .photo.duo.contain{background:#fff; gap:0;}
 .card .photo.duo.contain img{object-fit:contain;}
 .card .photo.duo.contain img + img{border-left:1px solid #e3e3e3;}
@@ -389,7 +391,7 @@ footer{text-align:center; padding:40px 6vw 60px; color:var(--muted); font-size:1
 <p class="desc"><span class="pl">Zupa z placków rybnych i golonki wołowej.</span><span class="en">Soup with fish cakes and beef knuckle.</span></p></div></article>
 <article class="card"><div class="photo"><img src="img/dania/budaejjigae.jpg" alt="Budaejjigae" loading="lazy"></div>
 <div class="card-body"><div class="card-top"><h3><span class="num">64.</span><span class="kor">부대찌개</span>Budaejjigae</h3><span class="price">160 zł</span></div>
-<p class="desc"><span class="pl">Ostra zupa z wieprzowiną, szynką, kiełbasą, czerwoną fasolą, kimchi, tofu i makaronem. *소자 Small — 90 zł.</span><span class="en">Spicy soup with pork, ham, sausage, red beans, kimchi, tofu and noodles. *소자 Small — 90 zł.</span></p></div></article>
+<p class="desc"><span class="pl">Ostra zupa z wieprzowiną, szynką, kiełbasą, czerwoną fasolą, kimchi, tofu i makaronem. *소자 Small — 100 zł.</span><span class="en">Spicy soup with pork, ham, sausage, red beans, kimchi, tofu and noodles. *소자 Small — 100 zł.</span></p></div></article>
 <article class="card"><div class="photo"><img src="img/dania/chadoldoenjangjeongol.jpg" alt="Chadol doenjang jeongol" loading="lazy"></div>
 <div class="card-body"><div class="card-top"><h3><span class="num">65.</span><span class="kor">차돌 된장 전골</span>Chadol doenjang jeongol</h3><span class="price">150 zł</span></div>
 <p class="desc"><span class="pl">Zupa z pasty sojowej z tofu, warzywami i mostkiem wołowym.</span><span class="en">Soybean paste soup with tofu, vegetables and beef brisket.</span></p></div></article>
@@ -398,7 +400,7 @@ footer{text-align:center; padding:40px 6vw 60px; color:var(--muted); font-size:1
 <p class="desc"><span class="pl">Bogata zupa z pasty sojowej z tofu, warzywami i mostkiem wołowym.</span><span class="en">A rich soybean paste soup with tofu, vegetables and beef brisket.</span></p></div></article>
 <article class="card"><div class="photo"><img src="img/dania/kimchijeongol.jpg" alt="Kimchijeongol" loading="lazy"></div>
 <div class="card-body"><div class="card-top"><h3><span class="num">67.</span><span class="kor">김치전골</span>Kimchijeongol</h3><span class="price">140 zł</span></div>
-<p class="desc"><span class="pl">Zupa z koreańskiej kapusty pekińskiej kimchi z wołowiną.</span><span class="en">Soup with Korean napa cabbage kimchi and beef.</span></p></div></article>
+<p class="desc"><span class="pl">Zupa kimchi z boczkiem wieprzowym.</span><span class="en">Kimchi soup with pork belly.</span></p></div></article>
 </div>
 </section>
 <!-- DUZE ZUPY II -->
@@ -407,7 +409,7 @@ footer{text-align:center; padding:40px 6vw 60px; color:var(--muted); font-size:1
 <div class="grid">
 <article class="card"><div class="photo"><img src="img/dania/sundaejeongol.jpg" alt="Sundaejeongol" loading="lazy"></div>
 <div class="card-body"><div class="card-top"><h3><span class="num">68.</span><span class="kor">순대전골</span>Sundaejeongol</h3><span class="price">170 zł</span></div>
-<p class="desc"><span class="pl">Zupa z koreańską kaszanką oraz z podrobami wieprzowymi.</span><span class="en">Soup with Korean blood sausage and pork offal.</span></p></div></article>
+<p class="desc"><span class="pl">Zupa z koreańskim puddingiem i częścią podrobów wieprzowych.</span><span class="en">Soup with Korean pudding and part of pork offal.</span></p></div></article>
 <article class="card"><div class="photo"><img src="img/dania/chadolbeosukjeongol.jpg" alt="Chadol beosuk geongol" loading="lazy"></div>
 <div class="card-body"><div class="card-top"><h3><span class="num">69.</span><span class="kor">차돌 버섯 전골</span>Chadol beosuk geongol</h3><span class="price">170 zł</span></div>
 <p class="desc"><span class="pl">Pikantna zupa z grzybami i mostkiem wołowym.</span><span class="en">Spicy soup with mushrooms and beef brisket.</span></p></div></article>
@@ -433,15 +435,20 @@ footer{text-align:center; padding:40px 6vw 60px; color:var(--muted); font-size:1
 <div class="cat-head"><h2>GRILL — BBQ Party</h2></div>
 <p class="cat-sub"><span class="pl">Co najmniej 2 porcje, z wyjątkiem nr 75 (dostępne pojedyncze porcje)</span><span class="en">Minimum 2 portions, except No. 75 (single portions available)</span></p>
 <div class="grid">
-<article class="card"><div class="card-body no-photo"><div class="card-top"><h3><span class="num">75.</span><span class="kor">철판 불고기</span>Cheolpan-bulgogi (400g)</h3><span class="price">140 zł</span></div>
+<article class="card"><div class="photo"><img src="img/dania/cheolpan-bulgogi.jpg" alt="Cheolpan-bulgogi" loading="lazy"></div>
+<div class="card-body"><div class="card-top"><h3><span class="num">75.</span><span class="kor">철판 불고기</span>Cheolpan-bulgogi (400g)</h3><span class="price">140 zł</span></div>
 <p class="desc"><span class="pl">Pokrojona wołowina, sos sojowy z warzywami i makaronem szklanym. Dostępne porcje pojedyncze.</span><span class="en">Sliced beef in soy sauce with vegetables and glass noodles. Single portions available.</span></p></div></article>
-<article class="card"><div class="card-body no-photo"><div class="card-top"><h3><span class="num">76.</span><span class="kor">항정살</span>Hangjeongsal (200g)</h3><span class="price">65 zł</span></div>
+<article class="card"><div class="photo"><img src="img/dania/hangjeongsal-grill.jpg" alt="Hangjeongsal" loading="lazy"></div>
+<div class="card-body"><div class="card-top"><h3><span class="num">76.</span><span class="kor">항정살</span>Hangjeongsal (200g)</h3><span class="price">65 zł</span></div>
 <p class="desc"><span class="pl">Karkówka wieprzowa, grillowana.</span><span class="en">Grilled pork neck.</span></p></div></article>
-<article class="card"><div class="card-body no-photo"><div class="card-top"><h3><span class="num">77.</span><span class="kor">삼겹살</span>Samgyeobsal (200g)</h3><span class="price">55 zł</span></div>
+<article class="card"><div class="photo"><img src="img/dania/samgyeopsal.jpg" alt="Samgyeobsal" loading="lazy"></div>
+<div class="card-body"><div class="card-top"><h3><span class="num">77.</span><span class="kor">삼겹살</span>Samgyeobsal (200g)</h3><span class="price">55 zł</span></div>
 <p class="desc"><span class="pl">Boczek wieprzowy.</span><span class="en">Pork belly.</span></p></div></article>
-<article class="card"><div class="card-body no-photo"><div class="card-top"><h3><span class="num">78.</span><span class="kor">대패 삼겹살</span>Daepae samgyeobsal (200g)</h3><span class="price">55 zł</span></div>
+<article class="card"><div class="photo"><img src="img/dania/daepae-samgyeopsal.jpg" alt="Daepae samgyeobsal" loading="lazy"></div>
+<div class="card-body"><div class="card-top"><h3><span class="num">78.</span><span class="kor">대패 삼겹살</span>Daepae samgyeobsal (200g)</h3><span class="price">55 zł</span></div>
 <p class="desc"><span class="pl">Cienko pokrojony mrożony brzuch wieprzowy.</span><span class="en">Thinly sliced frozen pork belly.</span></p></div></article>
-<article class="card"><div class="card-body no-photo"><div class="card-top"><h3><span class="num">79.</span><span class="kor">차돌박이</span>Chadolbag-i (200g)</h3><span class="price">80 zł</span></div>
+<article class="card"><div class="photo"><img src="img/dania/chadolbagi.jpg" alt="Chadolbag-i" loading="lazy"></div>
+<div class="card-body"><div class="card-top"><h3><span class="num">79.</span><span class="kor">차돌박이</span>Chadolbag-i (200g)</h3><span class="price">80 zł</span></div>
 <p class="desc"><span class="pl">Plasterki mostka wołowego.</span><span class="en">Sliced beef brisket.</span></p></div></article>
 </div>
 </section>
@@ -450,25 +457,28 @@ footer{text-align:center; padding:40px 6vw 60px; color:var(--muted); font-size:1
 <div class="cat-head"><h2>Napoje &amp; Alkohole</h2></div>
 <p class="cat-sub"><span class="pl">*탄산수 원하시면, 직원에게 알려주세요 — jeśli chcesz wodę gazowaną, poproś o nią pracownika obsługi.</span><span class="en">*탄산수 원하시면, 직원에게 알려주세요 — if you'd like sparkling water, please ask a staff member.</span></p>
 <div class="grid">
-<article class="card"><div class="photo"><img src="img/dania/beer.jpg" alt="Piwo" loading="lazy"></div>
+<article class="card"><div class="photo contain"><img src="img/dania/beer.jpg" alt="Piwo" loading="lazy"></div>
 <div class="card-body"><div class="card-top"><h3><span class="kor">맥주</span>Piwo (Tyskie)</h3><span class="price">15 zł</span></div></div></article>
 <article class="card"><div class="photo duo contain"><img src="img/dania/draftbeer.jpg" alt="Lech Premium" loading="lazy"><img src="img/dania/kozel-dark.jpg" alt="Kozel Cerny" loading="lazy"></div>
 <div class="card-body"><div class="card-top"><h3><span class="kor">생맥주</span>Draft Beer — 0.5L</h3><span class="price">18 zł</span></div>
 <p class="desc"><span class="pl">1) 레흐 프리미엄 (LECH PREMIUM)<br>2) 코젤다크 (KOZEL CERNY)</span><span class="en">1) 레흐 프리미엄 (LECH PREMIUM)<br>2) 코젤다크 (KOZEL CERNY)</span></p></div></article>
-<article class="card"><div class="photo"><img src="img/dania/soju.jpg" alt="Soju" loading="lazy"></div>
+<article class="card"><div class="photo contain"><img src="img/dania/soju.jpg" alt="Soju" loading="lazy"></div>
 <div class="card-body"><div class="card-top"><h3><span class="kor">소주</span>Soju — 16% Alc</h3><span class="price">55 zł</span></div>
 <p class="desc"><span class="pl">Klasyczne soju.</span><span class="en">Classic soju.</span></p></div></article>
-<article class="card"><div class="photo"><img src="img/dania/saerosoju.jpg" alt="Saero soju" loading="lazy"></div>
+<article class="card"><div class="photo contain" style="background:#f8f8f8"><img src="img/dania/saerosoju.jpg" alt="Saero soju" loading="lazy"></div>
 <div class="card-body"><div class="card-top"><h3><span class="kor">새로 소주</span>Saero soju (bez cukru) — 16% Alc</h3><span class="price">55 zł</span></div></div></article>
-<article class="card"><div class="photo"><img src="img/dania/fruitsoju.jpg" alt="Owocowe soju" loading="lazy"></div>
+<article class="card"><div class="photo contain"><img src="img/dania/fruitsoju.jpg" alt="Owocowe soju" loading="lazy"></div>
 <div class="card-body"><div class="card-top"><h3><span class="kor">과일맛 소주</span>Owocowe soju — 13% Alc</h3><span class="price">55 zł</span></div></div></article>
-<article class="card"><div class="photo"><img src="img/dania/hawyo.jpg" alt="Hawyo soju" loading="lazy"></div>
+<article class="card"><div class="photo contain"><img src="img/dania/hawyo.jpg" alt="Hawyo soju" loading="lazy"></div>
 <div class="card-body"><div class="card-top"><h3><span class="kor">화요 소주</span>Hawyo soju — 25% Alc (375ml)</h3><span class="price">110 zł</span></div></div></article>
-<article class="card"><div class="photo"><img src="img/dania/makgeolli.jpg" alt="Makgeolli" loading="lazy"></div>
-<div class="card-body"><div class="card-top"><h3><span class="kor">막걸리</span>Makgeolli — 6% Alc / Alba Makgeolli — 4% Alc</h3><span class="price">50 zł</span></div></div></article>
-<article class="card"><div class="card-body no-photo"><div class="card-top"><h3><span class="kor">하이볼 칵테일</span>High Ball Cocktail</h3><span class="price">25 zł</span></div>
+<article class="card"><div class="card-body no-photo"><div class="card-top"><h3><span class="kor">막걸리</span>Makgeolli — 6% Alc</h3><span class="price">50 zł</span></div></div></article>
+<article class="card"><div class="photo contain"><img src="img/dania/makgeolli.jpg" alt="Chestnut Makgeolli" loading="lazy"></div>
+<div class="card-body"><div class="card-top"><h3><span class="kor">알밤 막걸리</span>Chestnut Makgeolli — 4% Alc</h3><span class="price">50 zł</span></div></div></article>
+<article class="card"><div class="photo"><img src="img/dania/highball.jpg" alt="High Ball Cocktail" loading="lazy"></div>
+<div class="card-body"><div class="card-top"><h3><span class="kor">하이볼 칵테일</span>High Ball Cocktail</h3><span class="price">25 zł</span></div>
 <p class="desc"><span class="pl">Lemon juice, Jameson whisky, Schweppes.</span><span class="en">Lemon juice, Jameson whisky, Schweppes.</span></p></div></article>
-<article class="card"><div class="card-body no-photo"><div class="card-top"><h3><span class="kor">음료</span>Napoje (Pepsi, 7-up, Milkis, Mirinda, Mountain Dew, Lemoniada)</h3><span class="price">10 zł</span></div></div></article>
+<article class="card"><div class="photo"><img src="img/dania/soft-drinks.jpg" alt="Napoje: Pepsi, 7-up, Mirinda, Milkis" loading="lazy"></div>
+<div class="card-body"><div class="card-top"><h3><span class="kor">음료</span>Napoje (Pepsi, 7-up, Milkis, Mirinda, Mountain Dew, Lemoniada)</h3><span class="price">10 zł</span></div></div></article>
 </div>
 </section>
 </main>
