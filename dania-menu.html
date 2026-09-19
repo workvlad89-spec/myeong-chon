@@ -83,7 +83,8 @@ transition:transform .2s ease, border-color .2s ease;
 .card:hover{transform:translateY(-3px); border-color:rgba(224,83,63,0.4);}
 .card .photo{aspect-ratio:4/3; overflow:hidden; background:var(--slate-2);}
 .card .photo img{width:100%; height:100%; object-fit:cover; display:block;}
-.card .photo.duo{display:grid; grid-template-columns:1fr 1fr; gap:2px;}
+.card .photo.duo{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); grid-template-rows:minmax(0,1fr); gap:2px;}
+.card .photo.duo img{min-width:0; min-height:0;}
 .card .photo.contain{background:#fff;}
 .card .photo.contain img{object-fit:contain;}
 .card .photo.duo.contain{background:#fff; gap:0;}
@@ -462,16 +463,17 @@ footer{text-align:center; padding:40px 6vw 60px; color:var(--muted); font-size:1
 <article class="card"><div class="photo duo contain"><img src="img/dania/draftbeer.jpg" alt="Lech Premium" loading="lazy"><img src="img/dania/kozel-dark.jpg" alt="Kozel Cerny" loading="lazy"></div>
 <div class="card-body"><div class="card-top"><h3><span class="kor">생맥주</span>Draft Beer — 0.5L</h3><span class="price">18 zł</span></div>
 <p class="desc"><span class="pl">1) 레흐 프리미엄 (LECH PREMIUM)<br>2) 코젤다크 (KOZEL CERNY)</span><span class="en">1) 레흐 프리미엄 (LECH PREMIUM)<br>2) 코젤다크 (KOZEL CERNY)</span></p></div></article>
-<article class="card"><div class="photo contain"><img src="img/dania/soju.jpg" alt="Soju" loading="lazy"></div>
+<article class="card"><div class="photo duo contain"><img src="img/dania/soju.jpg" alt="Chamisul soju" loading="lazy"><img src="img/dania/jinro-is-back.jpg" alt="Jinro Is Back soju" loading="lazy"></div>
 <div class="card-body"><div class="card-top"><h3><span class="kor">소주</span>Soju — 16% Alc</h3><span class="price">55 zł</span></div>
-<p class="desc"><span class="pl">Klasyczne soju.</span><span class="en">Classic soju.</span></p></div></article>
+<p class="desc"><span class="pl">Klasyczne soju: Chamisul / Jinro Is Back.</span><span class="en">Classic soju: Chamisul / Jinro Is Back.</span></p></div></article>
 <article class="card"><div class="photo contain" style="background:#f8f8f8"><img src="img/dania/saerosoju.jpg" alt="Saero soju" loading="lazy"></div>
 <div class="card-body"><div class="card-top"><h3><span class="kor">새로 소주</span>Saero soju (bez cukru) — 16% Alc</h3><span class="price">55 zł</span></div></div></article>
 <article class="card"><div class="photo contain"><img src="img/dania/fruitsoju.jpg" alt="Owocowe soju" loading="lazy"></div>
 <div class="card-body"><div class="card-top"><h3><span class="kor">과일맛 소주</span>Owocowe soju — 13% Alc</h3><span class="price">55 zł</span></div></div></article>
 <article class="card"><div class="photo contain"><img src="img/dania/hawyo.jpg" alt="Hawyo soju" loading="lazy"></div>
 <div class="card-body"><div class="card-top"><h3><span class="kor">화요 소주</span>Hawyo soju — 25% Alc (375ml)</h3><span class="price">110 zł</span></div></div></article>
-<article class="card"><div class="card-body no-photo"><div class="card-top"><h3><span class="kor">막걸리</span>Makgeolli — 6% Alc</h3><span class="price">50 zł</span></div></div></article>
+<article class="card"><div class="photo contain"><img src="img/dania/makgeolli-original.jpg" alt="Makgeolli" loading="lazy"></div>
+<div class="card-body"><div class="card-top"><h3><span class="kor">막걸리</span>Makgeolli — 6% Alc</h3><span class="price">50 zł</span></div></div></article>
 <article class="card"><div class="photo contain"><img src="img/dania/makgeolli.jpg" alt="Chestnut Makgeolli" loading="lazy"></div>
 <div class="card-body"><div class="card-top"><h3><span class="kor">알밤 막걸리</span>Chestnut Makgeolli — 4% Alc</h3><span class="price">50 zł</span></div></div></article>
 <article class="card"><div class="photo"><img src="img/dania/highball.jpg" alt="High Ball Cocktail" loading="lazy"></div>
